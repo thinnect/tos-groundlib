@@ -1,0 +1,17 @@
+COMPONENT=LoggingTestC
+
+CFLAGS += -I$(PWD)
+
+PLATFORM_BAUDRATE ?= 500000UL
+ifneq ($(PLATFORM_BAUDRATE),0)
+	CFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
+endif
+
+BASE_LOG_LEVEL ?= 0xFFFF
+
+include ../../tos/groundlib.mk
+
+# Avoid strange TinyOS issues
+CFLAGS += -DTASKLET_IS_TASK
+
+include $(MAKERULES)
