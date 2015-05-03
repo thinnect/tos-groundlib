@@ -1,7 +1,7 @@
 /**
  * Fragmentation and assembly functions.
  * Maximum fragment size needs to be known for assembly, all but the last fragment need to be of this size, the last one can be shorter.
- * Maximum number of fragments is 8, maximum data size is 256 bytes.
+ * Maximum number of fragments is 8, maximum data size is 255 bytes.
  *
  * @author Raido Pahtma
  * @license MIT
@@ -13,6 +13,25 @@
 #ifndef NESC
 #include <stdint.h>
 #endif // NESC
+
+/**
+ * Compute the number of fragments needed to split dataSize over fragments of fragMaxSize.
+ * Supports sending empty messages - returns 1 for dataSize 0.
+ *
+ * @param dataSize - Number of bytes to send.
+ * @param fragMaxSize - Free space in one fragment.
+ *
+ * @return Number of fragments needed to send dataSize bytes of data.
+ */
+uint8_t data_fragments(uint8_t dataSize, uint8_t fragMaxSize)
+{
+	uint8_t frags = (uint8_t)(1 + ((((int16_t)dataSize) - 1) / fragMaxSize));
+	if(frags == 0)
+	{
+		return 1;
+	}
+	return frags;
+}
 
 /**
  * @return size of fragment
