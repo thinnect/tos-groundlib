@@ -22,6 +22,11 @@ CFLAGS += -I$(THIS_GROUNDLIB_DIR)/blinky
 CFLAGS += -I$(THIS_GROUNDLIB_DIR)/control
 
 # --------------------------------------------------------------------
+#            Address initialization modules
+# --------------------------------------------------------------------
+CFLAGS += -I$(THIS_GROUNDLIB_DIR)/boot
+
+# --------------------------------------------------------------------
 #            MemChunk
 # --------------------------------------------------------------------
 CFLAGS += -I$(THIS_GROUNDLIB_DIR)/memchunk
