@@ -2,7 +2,7 @@
  * @author Raido Pahtma
  * @license MIT
 */
-generic module MemChunkP(uint8_t g_count, uint8_t g_size) {
+generic module MemChunkP(uint8_t g_count, uint16_t g_size) {
 	provides {
 		interface MemChunk;
 		interface Init;
@@ -13,7 +13,7 @@ implementation {
 	uint8_t m_mem[g_count][g_size];
 	bool locked[g_count];
 
-	command void* MemChunk.get(uint8_t length) {
+	command void* MemChunk.get(uint16_t length) {
 		uint8_t i;
 		for(i=0;i<g_count;i++)
 		{

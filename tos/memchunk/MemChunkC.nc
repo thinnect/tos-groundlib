@@ -2,7 +2,7 @@
  * @author Raido Pahtma
  * @license MIT
 */
-generic configuration MemChunkC(uint8_t g_count, uint8_t g_size) {
+generic configuration MemChunkC(uint8_t g_count, uint16_t g_size) {
 	provides interface MemChunk;
 }
 implementation {

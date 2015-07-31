@@ -4,7 +4,7 @@
 */
 interface MemChunk {
 
-	command void* get(uint8_t length);
+	command void* get(uint16_t length);
 
 	command error_t put(void* ptr);
 
