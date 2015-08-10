@@ -41,6 +41,11 @@ CFLAGS += -I$(THIS_GROUNDLIB_DIR)/globalpool
 # --------------------------------------------------------------------
 CFLAGS += -I$(THIS_GROUNDLIB_DIR)/toslogging
 
+# --------------------------------------------------------------------
+#            Interfaces
+# --------------------------------------------------------------------
+CFLAGS += -I$(THIS_GROUNDLIB_DIR)/interfaces
+
 BASE_LOG_LEVEL ?= 0
 ifneq ($(BASE_LOG_LEVEL),0)
     CFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
