@@ -74,6 +74,10 @@ ifdef PRINTF_BUFFER_SIZE
     PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
 endif
 
+ifdef PLATFORM_BAUDRATE
+	CFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
+endif
+
 # --------------------------------------------------------------------
 #            ...
 # --------------------------------------------------------------------
