@@ -23,7 +23,7 @@ implementation {
 	event void PrintfControl.startDone(error_t err)
 	{
 		call Timer.startPeriodic(1024UL);
-		info1("test debug");
+		debug1("test debug");
 		info1("test info");
 		warn1("test warning");
 		err1("test error");
