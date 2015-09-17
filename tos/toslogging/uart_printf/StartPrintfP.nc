@@ -39,7 +39,7 @@ implementation
 
 	task void stop()
 	{
-		signal SplitControl.startDone(SUCCESS);
+		signal SplitControl.stopDone(SUCCESS);
 	}
 
 	event void Timer.fired()
@@ -61,14 +61,18 @@ implementation
 
 	command error_t SplitControl.start()
 	{
-		error_t error = call PrintfControl.start();
-		if(error == SUCCESS)
+		if(m_state.booted == FALSE)
 		{
-			m_state.led = 0;
-			call Leds.set(0);
-			call Timer.startOneShot(g_printf_start_delay);
+			error_t error = call PrintfControl.start();
+			if(error == SUCCESS)
+			{
+				m_state.led = 0;
+				call Leds.set(0);
+				call Timer.startOneShot(g_printf_start_delay);
+			}
+			return error;
 		}
-		return error;
+		return EALREADY;
 	}
 
 	event void SysBoot.booted()

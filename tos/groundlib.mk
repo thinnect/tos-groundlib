@@ -49,33 +49,28 @@ CFLAGS += -I$(THIS_GROUNDLIB_DIR)/interfaces
 BASE_LOG_LEVEL ?= 0
 ifneq ($(BASE_LOG_LEVEL),0)
     CFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
-endif
 
-ifndef PRINTF_PORT
-    ifneq ($(BASE_LOG_LEVEL),0)
-        PRINTF_PORT = 0
+    PRINTF_PORT ?= 0
+    ifdef PRINTF_PORT
+        CFLAGS += -DPRINTF_PORT=$(PRINTF_PORT)
+        CFLAGS += -I$(THIS_GROUNDLIB_DIR)/toslogging/uart_printf
     endif
-endif
 
-ifdef PRINTF_PORT
-    CFLAGS += -DPRINTF_PORT=$(PRINTF_PORT)
-    CFLAGS += -I$(THIS_GROUNDLIB_DIR)/toslogging/uart_printf
+    MODULE_NAME_LENGTH ?= 4
+    ifdef MODULE_NAME_LENGTH
+        CFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
+    endif
+
+    PRINTF_BUFFER_SIZE ?= 255
+    ifdef PRINTF_BUFFER_SIZE
+        PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
+    endif
 else
     CFLAGS += -DBASE_LOG_LEVEL=0x0000
 endif
 
-MODULE_NAME_LENGTH ?= 4
-ifdef MODULE_NAME_LENGTH
-    CFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
-endif
-
-PRINTF_BUFFER_SIZE ?= 255
-ifdef PRINTF_BUFFER_SIZE
-    PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
-endif
-
 ifdef PLATFORM_BAUDRATE
-	CFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
+    CFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
 endif
 
 # --------------------------------------------------------------------
