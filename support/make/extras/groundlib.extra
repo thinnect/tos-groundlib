@@ -33,6 +33,7 @@ PFLAGS += -I%T/lib/groundlib/globalpool
 #            Logging over Serial
 # --------------------------------------------------------------------
 PFLAGS += -I%T/lib/groundlib/toslogging
+PFLAGS += -I%T/lib/groundlib/toslogging/boot_info
 
 BASE_LOG_LEVEL ?= 0
 ifneq ($(BASE_LOG_LEVEL),0)
