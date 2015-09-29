@@ -1,64 +1,52 @@
 #
-# Makefile extension to include all the stuff in this repository.
+# TinyOS extra to include all the stuff in this repository.
 # @author Raido Pahtma
 # @license MIT
 #
 
-THIS_GROUNDLIB_DIR := $(realpath $(dir $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))
-
-# --------------------------------------------------------------------
-#            This directory with header files
-# --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)
-
 # --------------------------------------------------------------------
 #            Blinky
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/blinky
+PFLAGS += -I%T/lib/groundlib/blinky
 
 # --------------------------------------------------------------------
 #            Std, split and boot control modules
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/control
+PFLAGS += -I%T/lib/groundlib/control
 
 # --------------------------------------------------------------------
 #            Address initialization modules
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/boot
+PFLAGS += -I%T/lib/groundlib/boot
 
 # --------------------------------------------------------------------
 #            MemChunk
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/memchunk
+PFLAGS += -I%T/lib/groundlib/memchunk
 
 # --------------------------------------------------------------------
 #            Global message_t pool
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/globalpool
+PFLAGS += -I%T/lib/groundlib/globalpool
 
 # --------------------------------------------------------------------
 #            Logging over Serial
 # --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/toslogging
-
-# --------------------------------------------------------------------
-#            Interfaces
-# --------------------------------------------------------------------
-CFLAGS += -I$(THIS_GROUNDLIB_DIR)/interfaces
+PFLAGS += -I%T/lib/groundlib/toslogging
 
 BASE_LOG_LEVEL ?= 0
 ifneq ($(BASE_LOG_LEVEL),0)
-    CFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
+    PFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
 
     PRINTF_PORT ?= 0
     ifdef PRINTF_PORT
-        CFLAGS += -DPRINTF_PORT=$(PRINTF_PORT)
-        CFLAGS += -I$(THIS_GROUNDLIB_DIR)/toslogging/uart_printf
+        PFLAGS += -DPRINTF_PORT=$(PRINTF_PORT)
+        PFLAGS += -I%T/lib/groundlib/toslogging/uart_printf
     endif
 
     MODULE_NAME_LENGTH ?= 4
     ifdef MODULE_NAME_LENGTH
-        CFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
+        PFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
     endif
 
     PRINTF_BUFFER_SIZE ?= 255
@@ -66,11 +54,11 @@ ifneq ($(BASE_LOG_LEVEL),0)
         PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
     endif
 else
-    CFLAGS += -DBASE_LOG_LEVEL=0x0000
+    PFLAGS += -DBASE_LOG_LEVEL=0x0000
 endif
 
 ifdef PLATFORM_BAUDRATE
-    CFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
+    PFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
 endif
 
 # --------------------------------------------------------------------
