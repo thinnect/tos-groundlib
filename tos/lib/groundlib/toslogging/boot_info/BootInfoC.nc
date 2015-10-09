@@ -4,9 +4,7 @@
  * @license MIT
  */
 #include "logger.h"
-configuration BootInfoC {
-
-}
+configuration BootInfoC { }
 implementation {
 
 	components BootInfoP;
@@ -15,6 +13,6 @@ implementation {
 	BootInfoP.Boot -> MainC;
 
 	components LocalIeeeEui64C;
-    BootInfoP.LocalIeeeEui64 -> LocalIeeeEui64C.LocalIeeeEui64;
+	BootInfoP.LocalIeeeEui64 -> LocalIeeeEui64C.LocalIeeeEui64;
 
 }

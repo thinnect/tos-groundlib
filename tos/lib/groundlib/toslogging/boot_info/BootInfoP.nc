@@ -12,7 +12,7 @@ module BootInfoP {
 implementation {
 
 	#define __MODUUL__ "binfo"
-	#define __LOG_LEVEL__ ( LOG_LEVEL_binfo & BASE_LOG_LEVEL )
+	#define __LOG_LEVEL__ ( LOG_LEVEL_BootInfoP & BASE_LOG_LEVEL )
 	#include "log.h"
 
 	event void Boot.booted()
