@@ -45,7 +45,7 @@ ifneq ($(BASE_LOG_LEVEL),0)
         PFLAGS += -I%T/lib/groundlib/toslogging/uart_printf
     endif
 
-    MODULE_NAME_LENGTH ?= 4
+    MODULE_NAME_LENGTH ?= 8
     ifdef MODULE_NAME_LENGTH
         PFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
     endif
