@@ -2,7 +2,7 @@
  * @author Raido Pahtma
  * @license MIT
 */
-generic module ClearMessagePoolP(const char g_name[]) {
+generic module ClearMessagePoolP() {
 	provides {
 		interface Pool<message_t>;
 	}
@@ -15,8 +15,8 @@ generic module ClearMessagePoolP(const char g_name[]) {
 implementation
 {
 
- 	#define __MODUUL__ g_name
-	#define __LOG_LEVEL__ ( LOG_LEVEL_ClearMessagePoolP & BASE_LOG_LEVEL )
+ 	#define __MODUUL__ "GPool"
+	#define __LOG_LEVEL__ ( LOG_LEVEL_ClearMessagePool & BASE_LOG_LEVEL )
 	#include "log.h"
 
 	command bool Pool.empty() {
@@ -27,7 +27,7 @@ implementation
 		return call SubPool.maxSize();
 	}
 
-	command error_t Pool.put(message_t *newVal) {
+	command error_t Pool.put(message_t* newVal) {
 		debug1("put %u %u %04x", call SubPool.size(), call SubPool.maxSize(), newVal);
 		return call SubPool.put(newVal);
 	}
@@ -38,6 +38,9 @@ implementation
 		msg = call SubPool.get();
 		if(msg != NULL) {
 			call Packet.clear(msg);
+		}
+		else {
+			info1("empty (%u/%u)", call SubPool.size(), call SubPool.maxSize());
 		}
 		return msg;
 	}
@@ -67,15 +70,13 @@ implementation
 		post poolStatus();
 	}
 
-	event void Boot.booted() {
-		post poolStatus();
-	}
-#else
-	event void Boot.booted() { }
-
 #endif // CLEAR_MESSAGE_POOL_MONITOR
 
-
-
+	event void Boot.booted() {
+		info1("size (%u/%u)", call SubPool.size(), call SubPool.maxSize());
+		#ifdef CLEAR_MESSAGE_POOL_MONITOR
+			post poolStatus();
+		#endif // CLEAR_MESSAGE_POOL_MONITOR
+	}
 
 }
