@@ -58,10 +58,6 @@ else
     PFLAGS += -DBASE_LOG_LEVEL=0x0000
 endif
 
-ifdef PLATFORM_BAUDRATE
-    PFLAGS += -DPLATFORM_BAUDRATE=$(PLATFORM_BAUDRATE)
-endif
-
 # --------------------------------------------------------------------
 #            ...
 # --------------------------------------------------------------------
