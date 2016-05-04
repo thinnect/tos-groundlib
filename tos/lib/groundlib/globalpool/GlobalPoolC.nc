@@ -8,10 +8,11 @@ configuration GlobalPoolC {
 implementation {
 
 	#ifndef GLOBAL_MESSAGE_POOL_SIZE
-	#define GLOBAL_MESSAGE_POOL_SIZE 5
+	#define GLOBAL_MESSAGE_POOL_SIZE 7
+	#else GLOBAL_MESSAGE_POOL_SIZE defined externally
 	#endif /* GLOBAL_MESSAGE_POOL_SIZE */
 
-	components new ClearMessagePoolP("GMP");
+	components new ClearMessagePoolP();
 	Pool = ClearMessagePoolP.Pool;
 
 	components new PoolC(message_t, GLOBAL_MESSAGE_POOL_SIZE);
