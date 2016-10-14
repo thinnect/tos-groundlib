@@ -7,9 +7,13 @@
 configuration MCUSRInfoC { }
 implementation {
 
+#ifdef TOSSIM
+	#warning "MCUSRInfoC does nothing in TOSSIM"
+#else
 	components MCUSRInfoP;
 
 	components MainC;
 	MCUSRInfoP.Boot -> MainC;
+#endif // TOSSIM
 
 }
