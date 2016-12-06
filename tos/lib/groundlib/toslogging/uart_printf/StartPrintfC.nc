@@ -2,7 +2,7 @@
  * @author Raido Pahtma
  * @license MIT
 */
-generic configuration StartPrintfC(uint32_t g_printf_start_delay) {
+configuration StartPrintfC {
 	provides {
 		interface SplitControl;
 		interface Boot;
@@ -13,7 +13,11 @@ generic configuration StartPrintfC(uint32_t g_printf_start_delay) {
 }
 implementation {
 
-	components new StartPrintfP(g_printf_start_delay);
+	#ifndef START_PRINTF_DELAY
+		#warning "default START_PRINTF_DELAY 1024"
+		#define START_PRINTF_DELAY 1024
+	#endif
+	components new StartPrintfP(START_PRINTF_DELAY);
 	SplitControl = StartPrintfP;
 	Boot = StartPrintfP;
 	StartPrintfP.SysBoot = SysBoot;
