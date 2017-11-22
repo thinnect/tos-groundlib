@@ -6,18 +6,27 @@
 #define __LOGGERS_H
 
 #include <message.h>
+//#include "main.h"
 
 #ifndef MODULE_NAME_LENGTH
 #define MODULE_NAME_LENGTH 12
 #endif // MODULE_NAME_LENGTH
 
-#ifdef _H_msp430hardware_h
+//#ifdef _H_msp430hardware_h
   #include <stdio.h>
-#endif
+//#endif
 #ifdef _H_atmega128hardware_H
 	#include <avr_stdio.h>
 	#include <avr/pgmspace.h>
 #endif
+#include <stdarg.h>
+#define PGM_P const char*
+#define PROGMEM
+#define PSTR(s) s
+#define strlen_P(s) strlen(s)
+#define strrchr_P(s, c) strrchr(s, c)
+#define vfprintf_P(stream, format, arg) vfprintf(stream, format, arg)
+#define printf_P(format, args...) printf(format, ##args)
 
 
 int printfflush();
@@ -33,8 +42,8 @@ void putsr( PGM_P str, uint8_t len )
 		--len;
 	}
 
-	while( len-- )
-		putchar( pgm_read_byte(str++) );
+	//while( len-- )
+		//putchar( pgm_read_byte(str++) );
 }
 
 void __loghead( uint16_t severity, PGM_P _file_, unsigned _line_ )
@@ -99,8 +108,9 @@ void __vlogger( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P format
 {
 	__vloggernnl( severity, moduul, __line__, format, a );
 
+	// RETARGET_WriteChar('\n');
 	putchar('\n');
-	printfflush();
+	//printfflush();
 }
 
 void __logger( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P format, ... )
@@ -131,7 +141,7 @@ void __vloggerb( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, 
 
 	__logmem(data, len);
 	putchar('\n');
-	printfflush();
+//	printfflush();
 }
 
 void __loggerb( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, void* data, uint8_t len, ...)

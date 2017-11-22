@@ -28,7 +28,9 @@ implementation
 		logger( error?LOG_WARN2:LOG_INFO2, "%s1:%s.start=%d", MY_NAME, FIRST_NAME, error );
 
 		if( error == EALREADY ) {
+			// error = SUCCESS;
 			error = call Second.start();
+
 			debug3( "%s2:%s.start=%d", MY_NAME, SECOND_NAME, error );
 		}
 
@@ -41,6 +43,7 @@ implementation
 
 		if( error==SUCCESS || error==EALREADY ) {
 			error = call Second.start();
+			// error = SUCCESS;
 			logger( error?LOG_WARN2:LOG_INFO2, "%s2:%s.start=%d", MY_NAME, SECOND_NAME, error );
 			switch( error ) {
 				case SUCCESS:
@@ -66,7 +69,8 @@ implementation
 
 	command error_t SplitControl.stop()
 	{
-		error_t error = call Second.stop();
+		error_t error;// = call Second.stop();
+		error = EALREADY;
 		logger( error?LOG_WARN2:LOG_INFO2, "%s2:%s.stop=%d", MY_NAME, SECOND_NAME, error );
 
 		if( error == EALREADY ) {
