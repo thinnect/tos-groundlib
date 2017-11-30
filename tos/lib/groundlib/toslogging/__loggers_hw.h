@@ -17,16 +17,17 @@
 //#endif
 #ifdef _H_atmega128hardware_H
 	#include <avr_stdio.h>
-	#include <avr/pgmspace.h>
+	
 #endif
+#include <avr/pgmspace.h>
 #include <stdarg.h>
-#define PGM_P const char*
-#define PROGMEM
-#define PSTR(s) s
-#define strlen_P(s) strlen(s)
-#define strrchr_P(s, c) strrchr(s, c)
-#define vfprintf_P(stream, format, arg) vfprintf(stream, format, arg)
-#define printf_P(format, args...) printf(format, ##args)
+// #define PGM_P const char*
+// #define PROGMEM
+// #define PSTR(s) s
+// #define strlen_P(s) strlen(s)
+// #define strrchr_P(s, c) strrchr(s, c)
+// #define vfprintf_P(stream, format, arg) vfprintf(stream, format, arg)
+// #define printf_P(format, args...) printf(format, ##args)
 
 
 int printfflush();
