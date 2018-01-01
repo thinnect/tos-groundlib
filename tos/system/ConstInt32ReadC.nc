@@ -15,4 +15,6 @@ implementation {
 		return post readDone();
 	}
 
+	default event void Read.readDone(error_t err, int32_t v) { }
+
 }
