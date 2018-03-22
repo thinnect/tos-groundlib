@@ -203,7 +203,7 @@ void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, 
 #endif
 
 	putchar('\n');
-	printfflush();
+	// printfflush();
 }
 
 void __loggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, ... )
