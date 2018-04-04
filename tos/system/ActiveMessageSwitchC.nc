@@ -89,9 +89,15 @@ implementation {
 		return ELAST;
 	}
 	default command uint8_t PrimaryAMSend.maxPayloadLength[am_id_t id]() {
-		return ELAST;
+		if(id != 0) {
+			return call PrimaryAMSend.maxPayloadLength[0]();
+		}
+		return 0;
 	}
 	default command void* PrimaryAMSend.getPayload[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			return call PrimaryAMSend.getPayload[0](msg, len);
+		}
 		return NULL;
 	}
 	default command error_t SecondaryAMSend.send[am_id_t id](am_addr_t addr, message_t* msg, uint8_t len) {
@@ -101,9 +107,15 @@ implementation {
 		return ELAST;
 	}
 	default command uint8_t SecondaryAMSend.maxPayloadLength[am_id_t id]() {
-		return ELAST;
+		if(id != 0) {
+			return call SecondaryAMSend.maxPayloadLength[0]();
+		}
+		return 0;
 	}
 	default command void* SecondaryAMSend.getPayload[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			return call SecondaryAMSend.getPayload[0](msg, len);
+		}
 		return NULL;
 	}
 
@@ -184,29 +196,135 @@ implementation {
 		return call SecondaryAMPacket.localGroup[id]();
 	}
 
-	default command am_addr_t PrimaryAMPacket.address[am_id_t id]() { return 0; }
-	default command am_addr_t PrimaryAMPacket.destination[am_id_t id](message_t* amsg) { return 0; }
-	default command am_addr_t PrimaryAMPacket.source[am_id_t id](message_t* amsg) { return 0; }
-	default command void PrimaryAMPacket.setDestination[am_id_t id](message_t* amsg, am_addr_t addr) { }
-	default command void PrimaryAMPacket.setSource[am_id_t id](message_t* amsg, am_addr_t addr) { }
-	default command bool PrimaryAMPacket.isForMe[am_id_t id](message_t* amsg) { return FALSE; }
-	default command am_id_t PrimaryAMPacket.type[am_id_t id](message_t* amsg) { return 0; }
-	default command void PrimaryAMPacket.setType[am_id_t id](message_t* amsg, am_id_t t) { }
-	default command am_group_t PrimaryAMPacket.group[am_id_t id](message_t* amsg) { return 0; }
-	default command void PrimaryAMPacket.setGroup[am_id_t id](message_t* amsg, am_group_t grp) { }
-	default command am_group_t PrimaryAMPacket.localGroup[am_id_t id]() { return 0; }
+	// -------------------------------------------------------------------------
 
-	default command am_addr_t SecondaryAMPacket.address[am_id_t id]() { return 0; }
-	default command am_addr_t SecondaryAMPacket.destination[am_id_t id](message_t* amsg) { return 0; }
-	default command am_addr_t SecondaryAMPacket.source[am_id_t id](message_t* amsg) { return 0; }
-	default command void SecondaryAMPacket.setDestination[am_id_t id](message_t* amsg, am_addr_t addr) { }
-	default command void SecondaryAMPacket.setSource[am_id_t id](message_t* amsg, am_addr_t addr) { }
-	default command bool SecondaryAMPacket.isForMe[am_id_t id](message_t* amsg) { return FALSE; }
-	default command am_id_t SecondaryAMPacket.type[am_id_t id](message_t* amsg) { return 0; }
-	default command void SecondaryAMPacket.setType[am_id_t id](message_t* amsg, am_id_t t) { }
-	default command am_group_t SecondaryAMPacket.group[am_id_t id](message_t* amsg) { return 0; }
-	default command void SecondaryAMPacket.setGroup[am_id_t id](message_t* amsg, am_group_t grp) { }
-	default command am_group_t SecondaryAMPacket.localGroup[am_id_t id]() { return 0; }
+	default command am_addr_t PrimaryAMPacket.address[am_id_t id]() {
+		if(id != 0) {
+			return call PrimaryAMPacket.address[0]();
+		}
+		return 0;
+	}
+	default command am_addr_t PrimaryAMPacket.destination[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call PrimaryAMPacket.destination[0](amsg);
+		}
+		return 0;
+	}
+	default command am_addr_t PrimaryAMPacket.source[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call PrimaryAMPacket.source[0](amsg);
+		}
+		return 0;
+	}
+	default command void PrimaryAMPacket.setDestination[am_id_t id](message_t* amsg, am_addr_t addr) {
+		if(id != 0) {
+			call PrimaryAMPacket.setDestination[0](amsg, addr);
+		}
+	}
+	default command void PrimaryAMPacket.setSource[am_id_t id](message_t* amsg, am_addr_t addr) {
+		if(id != 0) {
+			call PrimaryAMPacket.setSource[0](amsg, addr);
+		}
+	}
+	default command bool PrimaryAMPacket.isForMe[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call PrimaryAMPacket.isForMe[0](amsg);
+		}
+		return FALSE;
+	}
+	default command am_id_t PrimaryAMPacket.type[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call PrimaryAMPacket.type[0](amsg);
+		}
+		return 0;
+	}
+	default command void PrimaryAMPacket.setType[am_id_t id](message_t* amsg, am_id_t t) {
+		if(id != 0) {
+			call PrimaryAMPacket.setType[0](amsg, t);
+		}
+	}
+	default command am_group_t PrimaryAMPacket.group[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call PrimaryAMPacket.group[0](amsg);
+		}
+		return 0;
+	}
+	default command void PrimaryAMPacket.setGroup[am_id_t id](message_t* amsg, am_group_t grp) {
+		if(id != 0) {
+			call PrimaryAMPacket.setGroup[0](amsg, grp);
+		}
+	}
+	default command am_group_t PrimaryAMPacket.localGroup[am_id_t id]() {
+		if(id != 0) {
+			return call PrimaryAMPacket.localGroup[0]();
+		}
+		return 0;
+	}
+
+	// -------------------------------------------------------------------------
+
+	default command am_addr_t SecondaryAMPacket.address[am_id_t id]() {
+		if(id != 0) {
+			return call SecondaryAMPacket.address[0]();
+		}
+		return 0;
+	}
+	default command am_addr_t SecondaryAMPacket.destination[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call SecondaryAMPacket.destination[0](amsg);
+		}
+		return 0;
+	}
+	default command am_addr_t SecondaryAMPacket.source[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call SecondaryAMPacket.source[0](amsg);
+		}
+		return 0;
+	}
+	default command void SecondaryAMPacket.setDestination[am_id_t id](message_t* amsg, am_addr_t addr) {
+		if(id != 0) {
+			call SecondaryAMPacket.setDestination[0](amsg, addr);
+		}
+	}
+	default command void SecondaryAMPacket.setSource[am_id_t id](message_t* amsg, am_addr_t addr) {
+		if(id != 0) {
+			call SecondaryAMPacket.setSource[0](amsg, addr);
+		}
+	}
+	default command bool SecondaryAMPacket.isForMe[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call SecondaryAMPacket.isForMe[0](amsg);
+		}
+		return FALSE;
+	}
+	default command am_id_t SecondaryAMPacket.type[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call SecondaryAMPacket.type[0](amsg);
+		}
+		return 0;
+	}
+	default command void SecondaryAMPacket.setType[am_id_t id](message_t* amsg, am_id_t t) {
+		if(id != 0) {
+			call SecondaryAMPacket.setType[0](amsg, t);
+		}
+	}
+	default command am_group_t SecondaryAMPacket.group[am_id_t id](message_t* amsg) {
+		if(id != 0) {
+			return call SecondaryAMPacket.group[0](amsg);
+		}
+		return 0;
+	}
+	default command void SecondaryAMPacket.setGroup[am_id_t id](message_t* amsg, am_group_t grp) {
+		if(id != 0) {
+			call SecondaryAMPacket.setGroup[0](amsg, grp);
+		}
+	}
+	default command am_group_t SecondaryAMPacket.localGroup[am_id_t id]() {
+		if(id != 0) {
+			return call SecondaryAMPacket.localGroup[0]();
+		}
+		return 0;
+	}
 
 	// -------------------------------------------------------------------------
 
@@ -241,17 +359,67 @@ implementation {
 		return call SecondaryPacket.getPayload[id](amsg, len);
 	}
 
-	default command void PrimaryPacket.clear[am_id_t id](message_t* msg) { }
-	default command uint8_t PrimaryPacket.payloadLength[am_id_t id](message_t* msg) { return 0; }
-	default command void PrimaryPacket.setPayloadLength[am_id_t id](message_t* msg, uint8_t len) { }
-	default command uint8_t PrimaryPacket.maxPayloadLength[am_id_t id]() { return 0; }
-	default command void* PrimaryPacket.getPayload[am_id_t id](message_t* msg, uint8_t len) { return 0; }
+	// -------------------------------------------------------------------------
 
-	default command void SecondaryPacket.clear[am_id_t id](message_t* msg) { }
-	default command uint8_t SecondaryPacket.payloadLength[am_id_t id](message_t* msg) { return 0; }
-	default command void SecondaryPacket.setPayloadLength[am_id_t id](message_t* msg, uint8_t len) { }
-	default command uint8_t SecondaryPacket.maxPayloadLength[am_id_t id]() { return 0; }
-	default command void* SecondaryPacket.getPayload[am_id_t id](message_t* msg, uint8_t len) { return 0; }
+	default command void PrimaryPacket.clear[am_id_t id](message_t* msg) {
+		if(id != 0) {
+			call PrimaryPacket.clear[0](msg);
+		}
+	}
+	default command uint8_t PrimaryPacket.payloadLength[am_id_t id](message_t* msg) {
+		if(id != 0) {
+			call PrimaryPacket.payloadLength[0](msg);
+		}
+		return 0;
+	}
+	default command void PrimaryPacket.setPayloadLength[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			call PrimaryPacket.setPayloadLength[0](msg, len);
+		}
+	}
+	default command uint8_t PrimaryPacket.maxPayloadLength[am_id_t id]() {
+		if(id != 0) {
+			return call PrimaryPacket.maxPayloadLength[0]();
+		}
+		return 0;
+	}
+	default command void* PrimaryPacket.getPayload[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			return call PrimaryPacket.getPayload[0](msg, len);
+		}
+		return 0;
+	}
+
+	// -------------------------------------------------------------------------
+
+	default command void SecondaryPacket.clear[am_id_t id](message_t* msg) {
+		if(id != 0) {
+			call SecondaryPacket.clear[0](msg);
+		}
+	}
+	default command uint8_t SecondaryPacket.payloadLength[am_id_t id](message_t* msg) {
+		if(id != 0) {
+			call SecondaryPacket.payloadLength[0](msg);
+		}
+		return 0;
+	}
+	default command void SecondaryPacket.setPayloadLength[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			call SecondaryPacket.setPayloadLength[0](msg, len);
+		}
+	}
+	default command uint8_t SecondaryPacket.maxPayloadLength[am_id_t id]() {
+		if(id != 0) {
+			return call SecondaryPacket.maxPayloadLength[0]();
+		}
+		return 0;
+	}
+	default command void* SecondaryPacket.getPayload[am_id_t id](message_t* msg, uint8_t len) {
+		if(id != 0) {
+			return call SecondaryPacket.getPayload[0](msg, len);
+		}
+		return 0;
+	}
 
 	// -------------------------------------------------------------------------
 
