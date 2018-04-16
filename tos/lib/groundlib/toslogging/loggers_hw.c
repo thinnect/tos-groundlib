@@ -2,23 +2,10 @@
  * @author Andrei Lunjov, Raido Pahtma
  * @license MIT
 */
-#ifndef __LOGGERS_H
-#define __LOGGERS_H
 
-#include <message.h>
+#include "__loggers.h"
 
-#ifndef MODULE_NAME_LENGTH
-#define MODULE_NAME_LENGTH 12
-#endif // MODULE_NAME_LENGTH
-
-#ifdef _H_msp430hardware_h
-  #include <stdio.h>
-#endif
-#ifdef _H_atmega128hardware_H
-	#include <avr_stdio.h>
-	#include <avr/pgmspace.h>
-#endif
-
+//#include <message.h>
 
 int printfflush();
 uint32_t _getLocalTimeRadio();
@@ -160,8 +147,7 @@ void __loggerb2( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str1,
 	va_end( a );
 }
 
-
-void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, va_list a )
+/*void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, va_list a )
 {
 #if !defined(TFRAMES_ENABLED) && !defined(IEEE154FRAMES_ENABLED) && defined(PLATFORM_IRIS)
 	static const char headerFormat[] PROGMEM = "AM[%2X] %-4X>%-4X len=%3d fcf=%d dsn=%d destpan=%d group=%-2X";
@@ -193,15 +179,13 @@ void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, 
 
 	putchar('\n');
 	printfflush();
-}
+}*/
 
-void __loggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, ... )
+/*void __loggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, ... )
 {
 	va_list a;
 
 	va_start( a, msg );
 	__vloggerm( severity, moduul, __line__, str, msg, a );
 	va_end( a );
-}
-
-#endif
+}*/

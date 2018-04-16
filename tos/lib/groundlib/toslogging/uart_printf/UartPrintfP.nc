@@ -1,7 +1,7 @@
 //#include "printf.h"
 #include "logger.h"
 
-int printfflush() { return 1; }
+int printfflush() @spontaneous() { return 1; }
 
 
 // URDIE vs TXCIE methods for data transfer:

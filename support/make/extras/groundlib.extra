@@ -59,6 +59,9 @@ ifneq ($(BASE_LOG_LEVEL),0)
     ifdef PRINTF_BUFFER_SIZE
         PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
     endif
+
+    PFLAGS += %T/lib/groundlib/toslogging/loggers_hw.c
+
 else
     PFLAGS += -DBASE_LOG_LEVEL=0x0000
 endif

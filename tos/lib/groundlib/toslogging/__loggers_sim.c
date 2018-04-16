@@ -2,10 +2,8 @@
  * @author Raido Pahtma, Madis Uusjärv
  * @license MIT
 */
-#ifndef __LOGGERS_H
-#define __LOGGERS_H
 
-#include <message.h>
+// #include <message.h>
 
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 255
@@ -250,6 +248,7 @@ void __loggerb( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P format
 	free(mBuf);
 }
 
+/*
 void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, va_list a )
 {
 	char timestr[80];
@@ -265,5 +264,5 @@ void __loggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, m
 
 	dbg(DBG_CHANNEL_NAME, "%s #%04X %c|%13s:%4d|__loggerm\n", timestr, TOS_NODE_ID, sev(severity), module_name(moduul), __line__);
 }
-
+*/
 #endif // __LOGGERS_H
