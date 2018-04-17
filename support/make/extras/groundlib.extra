@@ -60,8 +60,13 @@ ifneq ($(BASE_LOG_LEVEL),0)
         PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
     endif
 
-    PFLAGS += %T/lib/groundlib/toslogging/loggers_hw.c
-
+    ifneq ($(filter sim,$(MAKECMDGOALS)),)
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_sim.c
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_sim.c
+    else
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_hw.c
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_hw.c
+    endif
 else
     PFLAGS += -DBASE_LOG_LEVEL=0x0000
 endif

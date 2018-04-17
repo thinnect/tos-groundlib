@@ -2,9 +2,6 @@
  * @author Raido Pahtma, Madis Uusjärv
  * @license MIT
 */
-
-// #include <message.h>
-
 #ifndef PRINTF_BUFFER_SIZE
 #define PRINTF_BUFFER_SIZE 255
 #endif
@@ -16,6 +13,7 @@
 #include "stdio.h"
 #include "printf.h"
 #include "time.h"
+
 #define PGM_P const char*
 #define PROGMEM
 #define PSTR(s) s
@@ -247,22 +245,3 @@ void __loggerb( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P format
 	free(dBuf);
 	free(mBuf);
 }
-
-/*
-void __vloggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, va_list a )
-{
-	char timestr[80];
-	__getTimestamp(timestr, sizeof(timestr));
-
-	dbg(DBG_CHANNEL_NAME, "%s #%04X %c|%13s:%4d|__vloggerm\n", timestr, TOS_NODE_ID, sev(severity), module_name(moduul), __line__);
-}
-
-void __loggerm( uint16_t severity, PGM_P moduul, uint16_t __line__, PGM_P str, message_t* msg, ... )
-{
-	char timestr[80];
-	__getTimestamp(timestr, sizeof(timestr));
-
-	dbg(DBG_CHANNEL_NAME, "%s #%04X %c|%13s:%4d|__loggerm\n", timestr, TOS_NODE_ID, sev(severity), module_name(moduul), __line__);
-}
-*/
-#endif // __LOGGERS_H
