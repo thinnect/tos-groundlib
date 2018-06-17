@@ -5,7 +5,10 @@
  * @license MIT
 */
 module SystemControlC {
-	provides interface Halt;
+	provides {
+		interface SystemControl;
+		interface Halt;
+	}
 	uses interface Halt as InitHalt;
 }
 implementation {
@@ -15,6 +18,10 @@ implementation {
 	#include "log.h"
 
 	event error_t InitHalt.halt(uint32_t grace_period) {
+		return call SystemControl.signalHalt(grace_period);
+	}
+
+	command error_t SystemControl.signalHalt(uint32_t grace_period) {
 		error_t err;
 		info1("HALT %"PRIu32, grace_period);
 		err = signal Halt.halt(grace_period);
@@ -22,6 +29,15 @@ implementation {
 			err1("e%d", err);
 		}
 		return err;
+	}
+
+	command void SystemControl.reboot(bool force) {
+		if(force == FALSE) {
+			signal Halt.halt(0);
+		}
+		#warning "This reboot solution only works for AVR"
+		wdt_enable(1);
+		while(1);
 	}
 
 }
