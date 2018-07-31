@@ -40,4 +40,6 @@ implementation {
 		while(1);
 	}
 
+	default event error_t Halt.halt(uint32_t grace_period) { return SUCCESS; }
+
 }
