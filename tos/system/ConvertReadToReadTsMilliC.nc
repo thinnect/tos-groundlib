@@ -4,7 +4,7 @@
  * @author Raido Pahtma
  * @license MIT
  **/
-generic module ConvertReadToReadTsMilliC(typedef value_type @number()) {
+generic configuration ConvertReadToReadTsMilliC(typedef value_type @number()) {
 	provides {
 		interface ReadTs<value_type, TMilli>;
 	}
@@ -14,11 +14,11 @@ generic module ConvertReadToReadTsMilliC(typedef value_type @number()) {
 }
 implementation {
 
-	components new ConvertReadToReadTsMilliP(value_type, TMilli);
-	ReadTs = ConvertReadToReadTsMilliP.ReadRs;
-	ConvertReadToReadTsMilliP.Read = Read;
+	components new ConvertReadToReadTsP(value_type, TMilli);
+	ReadTs = ConvertReadToReadTsP.ReadTs;
+	ConvertReadToReadTsP.Read = Read;
 
 	components LocalTimeMilliC;
-	ConvertReadToReadTsMilliP.LocalTime -> LocalTimeMilliC;
+	ConvertReadToReadTsP.LocalTime -> LocalTimeMilliC;
 
 }
