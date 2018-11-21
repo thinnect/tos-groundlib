@@ -17,11 +17,6 @@ implementation
 	#define __LOG_LEVEL__ ( LOG_LEVEL_SeqSplitControl & BASE_LOG_LEVEL )
 	#include "log.h"
 
-	task void startDone()
-	{
-		signal SplitControl.startDone( SUCCESS );
-	}
-
 	command error_t SplitControl.start()
 	{
 		error_t error = call First.start();
@@ -57,11 +52,6 @@ implementation
 	{
 		logger( error?LOG_WARN2:LOG_INFO2, "%s2:%s.startDone=%d", MY_NAME, SECOND_NAME, error );
 		signal SplitControl.startDone( error==EALREADY ? SUCCESS : error );
-	}
-
-	task void stopDone()
-	{
-		signal SplitControl.stopDone( SUCCESS );
 	}
 
 	command error_t SplitControl.stop()
