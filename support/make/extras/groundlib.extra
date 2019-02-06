@@ -40,6 +40,8 @@ PFLAGS += -I%T/lib/groundlib/globalpool
 PFLAGS += -I%T/lib/groundlib/toslogging
 PFLAGS += -I%T/lib/groundlib/toslogging/boot_info
 
+PFLAGS += -I%T/lib/groundlib/toslogging/avr_stdio
+
 BASE_LOG_LEVEL ?= 0
 ifneq ($(BASE_LOG_LEVEL),0)
     PFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
