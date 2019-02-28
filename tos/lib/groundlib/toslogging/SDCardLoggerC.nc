@@ -11,7 +11,7 @@ configuration SDCardLoggerC
 
 implementation
 {
-	components ActiveMessageExtC as RadioC;
+	components ActiveMessageC as RadioC;
 	components SDCardLoggerP;
 
 	SDCardLoggerP.LocalTimeRadio -> RadioC.LocalTimeRadio;

@@ -65,6 +65,10 @@ ifneq ($(BASE_LOG_LEVEL),0)
     ifneq ($(filter sim,$(MAKECMDGOALS)),)
         PFLAGS += %T/lib/groundlib/toslogging/loggers_sim.c
         PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_sim.c
+    else ifneq ($(filter container,$(MAKECMDGOALS)),)
+        # TODO extern log header
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_std.c
+        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_std.c
     else
         PFLAGS += %T/lib/groundlib/toslogging/loggers_hw.c
         PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_hw.c

@@ -18,6 +18,8 @@
 
 #ifdef __AVR__
 #include <avr/pgmspace.h>
+#else
+#define PGM_P const char*
 #endif
 
 int printfflush();
