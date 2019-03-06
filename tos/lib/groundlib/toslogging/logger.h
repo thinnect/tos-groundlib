@@ -42,12 +42,12 @@
 	#ifndef PRINTF_PORT
 		#define PRINTF_PORT 0
 	#endif
-
-	#ifndef TOSSIM
-		#include "__loggers.h"
-	#else
-		#include "__loggers_sim.h"
-	#endif
 #endif // BASE_LOG_LEVEL
+
+#ifdef TOSSIM
+	#include "__loggers_sim.h"
+#else
+	#include "__loggers.h"
+#endif
 
 #endif // LOGGER_H

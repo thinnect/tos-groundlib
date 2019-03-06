@@ -15,6 +15,7 @@
 #define LOG_MASK_ERR     0xF000
 
 #include <stdio.h>
+#include <stdarg.h>
 
 #ifdef __AVR__
 #include <avr/pgmspace.h>
