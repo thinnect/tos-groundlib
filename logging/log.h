@@ -5,6 +5,8 @@
 #ifndef LOG_H
 #define LOG_H
 
+#include "__loggers.h"
+
 #ifndef __MODUUL__
 	#warning no __MODUUL__ defined, using __FILE__
 	#define __MODUUL__ __FILE__

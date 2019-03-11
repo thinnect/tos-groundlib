@@ -16,11 +16,13 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdint.h>
 
 #ifdef __AVR__
 #include <avr/pgmspace.h>
 #else
 #define PGM_P const char*
+#define PROGMEM
 #endif
 
 int printfflush();
