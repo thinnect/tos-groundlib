@@ -39,47 +39,7 @@ PFLAGS += -I%T/lib/groundlib/globalpool
 # --------------------------------------------------------------------
 PFLAGS += -I%T/lib/groundlib/toslogging
 PFLAGS += -I%T/lib/groundlib/toslogging/boot_info
-
-PFLAGS += -I%T/lib/groundlib/toslogging/avr_stdio
-
-BASE_LOG_LEVEL ?= 0
-ifneq ($(BASE_LOG_LEVEL),0)
-    PFLAGS += -DBASE_LOG_LEVEL=$(BASE_LOG_LEVEL)
-
-    PRINTF_PORT ?= 0
-    ifdef PRINTF_PORT
-        PFLAGS += -DPRINTF_PORT=$(PRINTF_PORT)
-        PFLAGS += -I%T/lib/groundlib/toslogging/uart_printf
-    endif
-
-    MODULE_NAME_LENGTH ?= 8
-    ifdef MODULE_NAME_LENGTH
-        PFLAGS += -DMODULE_NAME_LENGTH=$(MODULE_NAME_LENGTH)
-    endif
-
-    PRINTF_BUFFER_SIZE ?= 255
-    ifdef PRINTF_BUFFER_SIZE
-        PFLAGS += -DPRINTF_BUFFER_SIZE=$(PRINTF_BUFFER_SIZE)
-    endif
-
-    ifneq ($(filter sim,$(MAKECMDGOALS)),)
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_sim.c
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_sim.c
-    else ifneq ($(filter container_arm,$(MAKECMDGOALS)),)
-        # nothing
-    else ifneq ($(filter container_pc,$(MAKECMDGOALS)),)
-        # nothing
-    else ifneq ($(filter pc,$(MAKECMDGOALS)),)
-        # TODO extern log header
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_std.c
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_std.c
-    else
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_hw.c
-        PFLAGS += %T/lib/groundlib/toslogging/loggers_msg_hw.c
-    endif
-else
-    PFLAGS += -DBASE_LOG_LEVEL=0x0000
-endif
+PFLAGS += -I%T/lib/groundlib/toslogging/uart_printf
 
 # --------------------------------------------------------------------
 #            ByteCommander
